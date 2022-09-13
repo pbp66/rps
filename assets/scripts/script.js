@@ -53,38 +53,38 @@ while (playAgain) {
         if ((computerResult === (playerResult + 1)) || (computerResult === (playerResult - 2))) {
             gameWinner = "Computer";
             gameResult = -1;
+            computerWins++;
+            computerStreakCurrent++;
+            playerStreakCurrent = 0;
+            if (computerStreakCurrent > computerStreakBest) {
+                computerStreakBest = computerStreakCurrent;
+            }
         } else {
             gameWinner = "You";
             gameResult = 1;
+            playerWins++;
+            playerStreakCurrent++;
+            computerStreakCurrent = 0;
+            if (playerStreakCurrent > playerStreakBest) {
+                playerStreakBest = playerStreakCurrent;
+            }
         } 
     } else {
         gameWinner = "Draw";
         gameResult = 0;
+        draws++;
+        computerStreakCurrent = 0;
+        playerStreakCurrent = 0;
     }
 
     // Customizable ending message for the user
     var endingMessage;
     if (gameResult === 1) {
         endingMessage = "\n\nCongratulations, you won!"
-        playerWins++;
-        playerStreakCurrent++;
-        computerStreakCurrent = 0;
-        if (playerStreakCurrent > playerStreakBest) {
-            playerStreakBest = playerStreakCurrent;
-        }
     } else if (gameResult === 0) {
         endingMessage = "\n\nIt's a draw! Try again?"
-        draws++;
-        computerStreakCurrent = 0;
-        playerStreakCurrent = 0;
     } else {
         endingMessage = "\n\nYou lose. Better luck next time."
-        computerWins++;
-        computerStreakCurrent++;
-        playerStreakCurrent = 0;
-        if (computerStreakCurrent > computerStreakBest) {
-            computerStreakBest = computerStreakCurrent;
-        }
     }
 
     totalGames++;
