@@ -1,10 +1,13 @@
 function rps() {
-    // var playerChoice = window.prompt("Rock, Paper, or Scissors? ");
+
+    // Variables for Game Stats
+
+    // Grab input from dropdown menu (select)
     var playerChoice = document.getElementById("rps-game").value;
     playerChoice = playerChoice.toLowerCase();
 
-
-    var  playerResult;
+    // Converting player choice to compare with the computer
+    var playerResult;
     if (playerChoice === "rock") {
         playerResult = 1;
     } else if (playerChoice === "paper") {
@@ -13,8 +16,10 @@ function rps() {
         playerResult = 3;
     }
 
+    // Get a random number between 1 and 3. One for each option (R,P, or S)
     var computerResult = Math.floor(3 * Math.random() + 1);
 
+    // Convert computer result from a number to text for descriptive messaging
     var computerChoice;
     if (computerResult === 1) {
         computerChoice = "rock";
@@ -24,6 +29,7 @@ function rps() {
         computerChoice = "scissors";
     }
 
+    
     var gameWinner;
     var gameResult;
     if (playerResult !== computerResult) {
