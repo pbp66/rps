@@ -7,6 +7,10 @@ function rps() {
     var computerWins = 0;
     var playerWins = 0;
     var totalGames = 0;
+    var playerStreakCurrent = 0;
+    var computerStreakCurrent = 0;
+    var playerStreakBest = 0;
+    var computerStreakBest = 0;
 
     while (playAgain) {
         // Grab input from dropdown menu (select)
