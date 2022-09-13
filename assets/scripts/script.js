@@ -6,6 +6,7 @@ var playAgain = true;
 // Variables for Game Stats
 var computerWins = 0;
 var playerWins = 0;
+var draws = 0;
 var totalGames = 0;
 var playerStreakCurrent = 0;
 var computerStreakCurrent = 0;
@@ -66,22 +67,23 @@ while (playAgain) {
     if (gameResult === 1) {
         endingMessage = "\n\nCongratulations, you won!"
         playerWins++;
-        if (previousWinner === gameResult) {
-            playerStreakCurrent++;
-            if (playerStreakCurrent > playerStreakBest) {
-                playerStreakBest = playerStreakCurrent;
-            }
+        playerStreakCurrent++;
+        computerStreakCurrent = 0;
+        if (playerStreakCurrent > playerStreakBest) {
+            playerStreakBest = playerStreakCurrent;
         }
     } else if (gameResult === 0) {
         endingMessage = "\n\nIt's a draw! Try again?"
+        draws++;
+        computerStreakCurrent = 0;
+        playerStreakCurrent = 0;
     } else {
         endingMessage = "\n\nYou lose. Better luck next time."
         computerWins++;
-        if (previousWinner === gameResult) {
-            computerStreakCurrent++;
-            if (computerStreakCurrent > computerStreakBest) {
-                computerStreakBest = computerStreakCurrent;
-            }
+        computerStreakCurrent++;
+        playerStreakCurrent = 0;
+        if (computerStreakCurrent > computerStreakBest) {
+            computerStreakBest = computerStreakCurrent;
         }
     }
 
