@@ -1,6 +1,9 @@
 function rps() {
 
     // Variables for Game Stats
+    var computerWins;
+    var playerWins;
+    var totalGames;
 
     // Grab input from dropdown menu (select)
     var playerChoice = document.getElementById("rps-game").value;
@@ -29,7 +32,7 @@ function rps() {
         computerChoice = "scissors";
     }
 
-    
+    // Using mathematical logic to compare results rather than compare each possible game result
     var gameWinner;
     var gameResult;
     if (playerResult !== computerResult) {
@@ -45,6 +48,7 @@ function rps() {
         gameResult = 0;
     }
 
+    // Customizable ending message for the user
     var endingMessage;
     if (gameResult === 1) {
         endingMessage = "\n\nCongratulations, you won!"
