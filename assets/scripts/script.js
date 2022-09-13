@@ -20,8 +20,11 @@ function rps() {
             playerResult = 1;
         } else if (playerChoice === "paper") {
             playerResult = 2;
-        } else {
+        } else if (playerChoice === "scissors"){
             playerResult = 3;
+        } else {
+            playAgain = confirm("Not a valid choice.\nChoices are rock, paper, or scissors.\n\nPlease try again.");
+            continue;
         }
 
         // Get a random number between 1 and 3. One for each option (R,P, or S)
@@ -67,6 +70,11 @@ function rps() {
         
         totalGames++;
         
-        playAgain = confirm("Your choice: " + playerChoice +"\nComputer Choice: " + computerChoice + "\nGame Winner: " + gameWinner + endingMessage + "\n\nPlayer Wins: " + playerWins + "\nComputer Wins: " + computerWins + "\nTotal Games: " + totalGames + "\nPlayer Win Ratio: " + (playerWins/totalGames).toFixed(2) + "\nComputer Win Ratio: " + (computerWins/totalGames).toFixed(2));
+        playAgain = confirm("Your choice: " + playerChoice +"\nComputer Choice: " + 
+        computerChoice + "\nGame Winner: " + gameWinner + endingMessage + 
+        "\n\nPlayer Wins: " + playerWins + "\nComputer Wins: " + computerWins + 
+        "\nTotal Games: " + totalGames + "\nPlayer Win Ratio: " + 
+        (playerWins/totalGames).toFixed(2) + "\nComputer Win Ratio: " + 
+        (computerWins/totalGames).toFixed(2));
     }
 }
