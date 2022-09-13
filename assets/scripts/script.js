@@ -1,103 +1,89 @@
 // To use the form within the html page, wrap script within function rps() {}
-
-//Repeat game
 var playAgain = true;
+var choices = ["rock", "paper", "scissors"];
+
+function gamePlayer() {
+    this.choice = 0;
+    this.wins = 0;
+    this.streakCurrent = 0;
+    this.streakBest = 0;
+    this.win = function() {    
+        this.wins++;
+        this.streakCurrent++;
+        if (this.streakCurrent > this.streakBest) {
+            this.streakBest = this.streakCurrent;
+        }
+    },
+    this.lose = function () {this.streakCurrent = 0;}
+}
+
+// Simplify player and computer with a constructor. 
+var player = new gamePlayer();
+var computer = new gamePlayer();
 
 // Variables for Game Stats
-var computerWins = 0;
-var playerWins = 0;
 var draws = 0;
 var totalGames = 0;
-var playerStreakCurrent = 0;
-var computerStreakCurrent = 0;
-var playerStreakBest = 0;
-var computerStreakBest = 0;
 var previousWinner = 0;
+var gameWinner;
+var gameResult = 0;
 
 while (playAgain) {
-    // Grab input from dropdown menu (select)
-    //var playerChoice = document.getElementById("rps-game").value;
-    var playerChoice = prompt("Rock, Paper, or Scissors?");
-    playerChoice = playerChoice.toLowerCase();
-
-    // Converting player choice to compare with the computer
-    var playerResult;
-    if (playerChoice === "rock") {
-        playerResult = 1;
-    } else if (playerChoice === "paper") {
-        playerResult = 2;
-    } else if (playerChoice === "scissors"){
-        playerResult = 3;
-    } else {
+    player.choice = choices.indexOf(prompt("Rock, Paper, or Scissors?").toLowerCase());
+    if (player.choice === -1) {
         playAgain = confirm("Not a valid choice.\nChoices are rock, paper, or scissors.\n\nPlease try again.");
         continue;
     }
-
-    // Get a random number between 1 and 3. One for each option (R,P, or S)
-    var computerResult = Math.floor(3 * Math.random() + 1);
-
-    // Convert computer result from a number to text for descriptive messaging
-    var computerChoice;
-    if (computerResult === 1) {
-        computerChoice = "rock";
-    } else if (computerResult === 2) {
-        computerChoice = "paper";
-    } else {
-        computerChoice = "scissors";
-    }
+    computer.choice = Math.floor(3 * Math.random());
 
     // Using mathematical logic to compare results rather than compare each possible game result
-    var gameWinner;
-    var gameResult;
-    if (playerResult !== computerResult) {
-        if ((computerResult === (playerResult + 1)) || (computerResult === (playerResult - 2))) {
-            gameWinner = "Computer";
-            gameResult = -1;
-            computerWins++;
-            computerStreakCurrent++;
-            playerStreakCurrent = 0;
-            if (computerStreakCurrent > computerStreakBest) {
-                computerStreakBest = computerStreakCurrent;
-            }
-        } else {
-            gameWinner = "You";
-            gameResult = 1;
-            playerWins++;
-            playerStreakCurrent++;
-            computerStreakCurrent = 0;
-            if (playerStreakCurrent > playerStreakBest) {
-                playerStreakBest = playerStreakCurrent;
-            }
-        } 
-    } else {
-        gameWinner = "Draw";
+    // Add a game object to reduce redundant code with gameWinner and gameResult
+    if (player.choice === computer.choice) {
+        gameWinner = "draw";
         gameResult = 0;
         draws++;
-        computerStreakCurrent = 0;
-        playerStreakCurrent = 0;
-    }
+        computer.lose();
+        player.lose();
+    } else if (
+        (computer.choice === (player.choice + 1)) || 
+        (computer.choice === (player.choice - 2))
+    ) {
+        gameWinner = choices[computer.choice];
+        gameResult = -1;
+        computer.win();
+        player.lose();
+    } else {
+        gameWinner = choices[player.choice];
+        gameResult = 1;
+        player.win();
+        computer.lose();
+    } 
 
     // Customizable ending message for the user
-    var endingMessage;
+    var endingMessage = "";
     if (gameResult === 1) {
         endingMessage = "\n\nCongratulations, you won!"
     } else if (gameResult === 0) {
-        endingMessage = "\n\nIt's a draw! Try again?"
+        endingMessage = "\n\nIt's a draw!"
     } else {
         endingMessage = "\n\nYou lose. Better luck next time."
     }
 
     totalGames++;
     
-    playAgain = confirm("Your choice: " + playerChoice + 
-    "     " + "Computer Choice: " + 
-    computerChoice + "\nGame Winner: " + gameWinner + endingMessage + 
-    "\n\nPlayer Wins: " + playerWins + "     " +"Computer Wins: " + computerWins + 
-    "     " + "Total Games: " + totalGames + "\nPlayer Win Ratio: " + 
-    (playerWins/totalGames).toFixed(2) + "     " + "Computer Win Ratio: " + 
-    (computerWins/totalGames).toFixed(2) + "\nPlayer Streak: " + playerStreakCurrent +
-    "     " + "Best Player Streak: " + playerStreakBest + "\nComputer Streak: " + computerStreakCurrent + "     " + "Best Computer Streak: " + computerStreakBest
-    );
+    alert("Your choice: " + choices[player.choice] + "\nComputer Choice: " + 
+    choices[computer.choice] + "\nGame Winner: " + gameWinner + endingMessage);
+
+    alert("Statistics:\nPlayer Wins: " + player.wins + 
+    "\nComputer Wins: " + computer.wins + "\nTotal Games: " + totalGames + 
+    "\nPlayer Win Ratio: " + (player.wins/totalGames).toFixed(2) + 
+    "\nComputer Win Ratio: " + (computer.wins/totalGames).toFixed(2));
+
+    alert("Streaks:\nPlayer Streak: " + player.streakCurrent + "\nBest Player Streak: " + 
+    player.streakBest + "\nComputer Streak: " + computer.streakCurrent + 
+    "\nBest Computer Streak: " + computer.streakBest);
+
+    playAgain = confirm("Play again?");
 
     // Assign game result to previous winner to track streaks
     previousWinner = gameResult;
