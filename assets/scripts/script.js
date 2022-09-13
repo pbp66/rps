@@ -87,12 +87,15 @@ while (playAgain) {
 
     totalGames++;
     
-    playAgain = confirm("Your choice: " + playerChoice +"\nComputer Choice: " + 
+    playAgain = confirm("Your choice: " + playerChoice + 
+    "     " + "Computer Choice: " + 
     computerChoice + "\nGame Winner: " + gameWinner + endingMessage + 
-    "\n\nPlayer Wins: " + playerWins + "\nComputer Wins: " + computerWins + 
-    "\nTotal Games: " + totalGames + "\nPlayer Win Ratio: " + 
-    (playerWins/totalGames).toFixed(2) + "\nComputer Win Ratio: " + 
-    (computerWins/totalGames).toFixed(2));
+    "\n\nPlayer Wins: " + playerWins + "     " +"Computer Wins: " + computerWins + 
+    "     " + "Total Games: " + totalGames + "\nPlayer Win Ratio: " + 
+    (playerWins/totalGames).toFixed(2) + "     " + "Computer Win Ratio: " + 
+    (computerWins/totalGames).toFixed(2) + "\nPlayer Streak: " + playerStreakCurrent +
+    "     " + "Best Player Streak: " + playerStreakBest + "\nComputer Streak: " + computerStreakCurrent + "     " + "Best Computer Streak: " + computerStreakBest
+    );
 
     // Assign game result to previous winner to track streaks
     previousWinner = gameResult;
