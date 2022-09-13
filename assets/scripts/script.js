@@ -67,6 +67,6 @@ function rps() {
         
         totalGames++;
         
-        playAgain = confirm("Your choice: " + playerChoice +"\nComputer Choice: " + computerChoice + "\nGame Winner: " + gameWinner + endingMessage + "\n\nGame Stats:\nPlayer Wins: " + playerWins + "\nComputer Wins: " + computerWins + "\nTotal Games: " + totalGames + "\nPlayer Win Ratio: " + playerWins/totalGames + "\nComputer Win Ratio: " + computerWins/totalGames);
+        playAgain = confirm("Your choice: " + playerChoice +"\nComputer Choice: " + computerChoice + "\nGame Winner: " + gameWinner + endingMessage + "\n\nPlayer Wins: " + playerWins + "\nComputer Wins: " + computerWins + "\nTotal Games: " + totalGames + "\nPlayer Win Ratio: " + (playerWins/totalGames).toFixed(2) + "\nComputer Win Ratio: " + (computerWins/totalGames).toFixed(2));
     }
 }
