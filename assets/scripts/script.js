@@ -11,6 +11,7 @@ var playerStreakCurrent = 0;
 var computerStreakCurrent = 0;
 var playerStreakBest = 0;
 var computerStreakBest = 0;
+var previousWinner = 0;
 
 while (playAgain) {
     // Grab input from dropdown menu (select)
@@ -65,13 +66,25 @@ while (playAgain) {
     if (gameResult === 1) {
         endingMessage = "\n\nCongratulations, you won!"
         playerWins++;
+        if (previousWinner === gameResult) {
+            playerStreakCurrent++;
+            if (playerStreakCurrent > playerStreakBest) {
+                playerStreakBest = playerStreakCurrent;
+            }
+        }
     } else if (gameResult === 0) {
         endingMessage = "\n\nIt's a draw! Try again?"
     } else {
         endingMessage = "\n\nYou lose. Better luck next time."
         computerWins++;
+        if (previousWinner === gameResult) {
+            computerStreakCurrent++;
+            if (computerStreakCurrent > computerStreakBest) {
+                computerStreakBest = computerStreakCurrent;
+            }
+        }
     }
-    
+
     totalGames++;
     
     playAgain = confirm("Your choice: " + playerChoice +"\nComputer Choice: " + 
@@ -80,4 +93,7 @@ while (playAgain) {
     "\nTotal Games: " + totalGames + "\nPlayer Win Ratio: " + 
     (playerWins/totalGames).toFixed(2) + "\nComputer Win Ratio: " + 
     (computerWins/totalGames).toFixed(2));
+
+    // Assign game result to previous winner to track streaks
+    previousWinner = gameResult;
 }
